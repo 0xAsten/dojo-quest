@@ -11,6 +11,7 @@ mod actions {
     use dojo_xyz::models::{Attributes, Position, Stats, Quest, PositionTrait, Counter};
     use super::IActions;
     use array::ArrayTrait;
+    use dojo_xyz::utils::roll;
 
     fn modifier(attribute: u32) -> u32 {
         let modifier = (attribute - 8) / 2;
@@ -62,10 +63,6 @@ mod actions {
         let roll = roll(20);
         let attack_roll = roll + attacker_modifier;
         (attack_roll >= defender_ac, roll)
-    }
-
-    fn roll(dice: u32) -> u32 {
-        dice
     }
 
     // impl: implement functions specified in trait
