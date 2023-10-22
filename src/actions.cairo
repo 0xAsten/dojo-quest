@@ -500,4 +500,38 @@ mod tests {
         let stats = get!(world, (palyer, count, 0), (Stats));
         stats.hp.print();
     }
+
+    #[test]
+    #[should_panic]
+    fn test_not_near() {
+        let palyer = starknet::contract_address_const::<0x0>();
+
+        let (world, actions_system) = spawn();
+
+        actions_system.move(0, 5);
+
+        actions_system.attack();
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_not_start() {
+        let palyer = starknet::contract_address_const::<0x0>();
+
+        let mut models = array![
+            attributes::TEST_CLASS_HASH,
+            position::TEST_CLASS_HASH,
+            stats::TEST_CLASS_HASH,
+            quest::TEST_CLASS_HASH,
+            counter::TEST_CLASS_HASH,
+        ];
+
+        let world = spawn_test_world(models);
+
+        let contract_address = world
+            .deploy_contract('salt', actions::TEST_CLASS_HASH.try_into().unwrap());
+        let actions_system = IActionsDispatcher { contract_address };
+
+        actions_system.attack();
+    }
 }
