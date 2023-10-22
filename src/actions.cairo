@@ -534,4 +534,37 @@ mod tests {
 
         actions_system.attack();
     }
+
+    #[test]
+    #[available_gas(3000000000000000)]
+    fn test_attack() {
+        let palyer = starknet::contract_address_const::<0x0>();
+
+        let (world, actions_system) = spawn();
+
+        let counter = get!(world, palyer, (Counter));
+        let count = counter.count;
+
+        let player_stats = get!(world, (palyer, count, 0), (Stats));
+        player_stats.hp.print();
+
+        let goblin_stats = get!(world, (palyer, count, 1), (Stats));
+        goblin_stats.hp.print();
+
+        actions_system.move(0, 5);
+        actions_system.move(5, 5);
+        actions_system.move(5, 8);
+
+        let position_player = get!(world, (palyer, count, 0), (Position));
+
+        let position_goblin = get!(world, (palyer, count, 1), (Position));
+
+        actions_system.attack();
+
+        let player_stats = get!(world, (palyer, count, 0), (Stats));
+        player_stats.hp.print();
+
+        let goblin_stats = get!(world, (palyer, count, 1), (Stats));
+        goblin_stats.hp.print();
+    }
 }
