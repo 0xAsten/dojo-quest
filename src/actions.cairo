@@ -11,13 +11,7 @@ mod actions {
     use dojo_xyz::models::{Attributes, Position, Stats, Quest, PositionTrait, Counter};
     use super::IActions;
     use array::ArrayTrait;
-    use dojo_xyz::utils::roll;
-
-    fn modifier(attribute: u32) -> u32 {
-        let modifier = (attribute - 8) / 2;
-
-        modifier
-    }
+    use dojo_xyz::utils::{roll, modifier, is_hit};
 
     fn best_goblin_move(
         player: Position, goblin: Position, grid_width: u32, grid_height: u32
@@ -57,12 +51,6 @@ mod actions {
         };
 
         best_position
-    }
-
-    fn is_hit(attacker_modifier: u32, defender_ac: u32) -> (bool, u32) {
-        let roll = roll(20);
-        let attack_roll = roll + attacker_modifier;
-        (attack_roll >= defender_ac, roll)
     }
 
     // impl: implement functions specified in trait
