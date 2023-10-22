@@ -1,7 +1,3 @@
-use dojo::world::{IWorldDispatcher, IWorldDispatcherTrait};
-use dojo_xyz::models::{Attributes, Position, Stats, Quest, PositionTrait, Counter};
-use starknet::{ContractAddress, ClassHash};
-
 #[starknet::interface]
 trait IActions<TContractState> {
     fn spawn(self: @TContractState, str: u32, dex: u32, con: u32, int: u32, wis: u32, cha: u32);
