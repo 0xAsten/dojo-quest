@@ -1,6 +1,6 @@
 [package]
 cairo-version = "2.2.0"
-name = "dojo_xyz"
+name = "dojo_quest"
 version = "0.3.0"
 
 [cairo]
@@ -13,6 +13,15 @@ dojo = { git = "https://github.com/dojoengine/dojo", tag="v0.3.0" }
 
 [tool.dojo]
 initializer_class_hash = "0xbeef"
+
+[tool.dojo.world]
+name = "dojo-quest"
+description = "Dojo-Quest is a grid-based adventure game inspired by Dungeons & Dragons"
+icon_uri = "file://assets/cover.png"
+cover_uri = "file://assets/cover.png"
+website = "https://dojoengine.org"
+socials.x = "https://twitter.com/0xasten"
+socials.github = "https://github.com/0xAsten/dojo-quest"
 
 [tool.dojo.env]
 rpc_url = "http://localhost:5050/"
