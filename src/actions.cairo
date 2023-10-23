@@ -8,10 +8,10 @@ trait IActions<TContractState> {
 #[dojo::contract]
 mod actions {
     use starknet::{ContractAddress, get_caller_address};
-    use dojo_xyz::models::{Attributes, Position, Stats, Quest, PositionTrait, Counter};
+    use dojo_quest::models::{Attributes, Position, Stats, Quest, PositionTrait, Counter};
     use super::IActions;
     use array::ArrayTrait;
-    use dojo_xyz::utils::{roll, modifier, is_hit};
+    use dojo_quest::utils::{roll, modifier, is_hit};
 
     fn best_goblin_move(
         player: Position, goblin: Position, grid_width: u32, grid_height: u32
@@ -305,8 +305,8 @@ mod tests {
     use dojo::test_utils::{spawn_test_world, deploy_contract};
 
     // import models
-    use dojo_xyz::models::{attributes, position, stats, quest, counter};
-    use dojo_xyz::models::{Attributes, Position, Stats, Quest, Counter};
+    use dojo_quest::models::{attributes, position, stats, quest, counter};
+    use dojo_quest::models::{Attributes, Position, Stats, Quest, Counter};
 
     // import actions
     use super::{actions, IActionsDispatcher, IActionsDispatcherTrait};
