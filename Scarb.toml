@@ -1,27 +1,27 @@
 [package]
 cairo-version = "2.2.0"
 name = "dojo_quest"
-version = "0.3.0"
+version = "0.3.3"
 
 [cairo]
 sierra-replace-ids = true
 
 [dependencies]
-dojo = { git = "https://github.com/dojoengine/dojo", tag="v0.3.0" }
+dojo = { git = "https://github.com/dojoengine/dojo", tag="v0.3.3" }
 
 [[target.dojo]]
 
 [tool.dojo]
 initializer_class_hash = "0xbeef"
 
-[tool.dojo.world]
-name = "dojo-quest"
-description = "Dojo-Quest is a grid-based adventure game inspired by Dungeons & Dragons"
-icon_uri = "file://assets/cover.png"
-cover_uri = "file://assets/cover.png"
-website = "https://dojoengine.org"
-socials.x = "https://twitter.com/0xasten"
-socials.github = "https://github.com/0xAsten/dojo-quest"
+#[tool.dojo.world]
+#name = "dojo-quest"
+#description = "Dojo-Quest is a grid-based adventure game inspired by Dungeons & Dragons"
+#icon_uri = "file://assets/cover.png"
+#cover_uri = "file://assets/cover.png"
+#website = "https://dojoengine.org"
+#socials.x = "https://twitter.com/0xasten"
+#socials.github = "https://github.com/0xAsten/dojo-quest"
 
 [tool.dojo.env]
 rpc_url = "http://localhost:5050/"
@@ -30,4 +30,4 @@ rpc_url = "http://localhost:5050/"
 #private_key = "0x455fd1e57c237a302c94b813bbee681480e8d361a4d1b24a2fac3a80ac656c"
 account_address = "0x517ececd29116499f4a1b64b094da79ba08dfd54a3edaa316134c41f8160973"
 private_key = "0x1800000000300000180000000000030000000000003006001800006600"
-#world_address = "0x567cdbc5a8eada35293c50053016664ad47e80a437aa786ad487ae46133243b"
+#world_address = "0x7bfc4dc34e5e8a3c7c29604134dbf6e0e9f133aa6431d1aa69d5f08164e67b6"
