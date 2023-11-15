@@ -188,7 +188,7 @@ mod actions {
             set!(world, (position_player));
 
             // Is Goblin near Player?
-            // if not near, determin Goblin's new x and y that to close in the palyer and totoal steps must less than 4
+            // if not near, determin Goblin's new x and y that to close in the player and totoal steps must less than 4
             if !position_player.is_neighbor(Option::Some((position_goblin.x, position_goblin.y))) {
                 // move closer
                 let new_position = best_goblin_move(position_player, position_goblin, 25, 20);
@@ -316,7 +316,7 @@ mod tests {
     #[test]
     #[available_gas(3000000000000000)]
     fn test_spawn() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let mut models = array![
             attributes::TEST_CLASS_HASH,
@@ -341,17 +341,17 @@ mod tests {
 
         actions_system.spawn(str, dex, con, int, wis, cha);
 
-        let counter = get!(world, palyer, (Counter));
+        let counter = get!(world, player, (Counter));
         let count = counter.count;
 
         //get quest
-        let quest = get!(world, (palyer, count), (Quest));
+        let quest = get!(world, (player, count), (Quest));
 
         assert(quest.quest_state == 1, 'quest state is incorrect');
         assert(quest.quest_id == 1, 'quest id is incorrect');
 
-        let position_player = get!(world, (palyer, count, 0), (Position));
-        let position_goblin = get!(world, (palyer, count, 1), (Position));
+        let position_player = get!(world, (player, count, 0), (Position));
+        let position_goblin = get!(world, (player, count, 1), (Position));
 
         assert(position_player.x == 0, 'player x is incorrect');
         assert(position_player.y == 0, 'player y is incorrect');
@@ -362,7 +362,7 @@ mod tests {
     #[test]
     #[available_gas(3000000000000000)]
     fn spawn() -> (IWorldDispatcher, IActionsDispatcher) {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let mut models = array![
             attributes::TEST_CLASS_HASH,
@@ -393,7 +393,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_out_bounds() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (_, actions_system) = spawn();
 
@@ -403,7 +403,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_exceed_steps() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (_, actions_system) = spawn();
 
@@ -413,7 +413,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_not_move() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (_, actions_system) = spawn();
 
@@ -423,17 +423,17 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_collision() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (world, actions_system) = spawn();
 
         actions_system.move(0, 5);
 
-        let counter = get!(world, palyer, (Counter));
+        let counter = get!(world, player, (Counter));
         let count = counter.count;
 
         //get quest
-        let position_player = get!(world, (palyer, count, 0), (Position));
+        let position_player = get!(world, (player, count, 0), (Position));
         assert(position_player.x == 0, 'move error');
         assert(position_player.y == 5, 'move error');
 
@@ -445,47 +445,47 @@ mod tests {
     #[test]
     #[available_gas(3000000000000000)]
     fn test_move() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (world, actions_system) = spawn();
 
         actions_system.move(0, 5);
 
-        let counter = get!(world, palyer, (Counter));
+        let counter = get!(world, player, (Counter));
         let count = counter.count;
 
-        let stats = get!(world, (palyer, count, 0), (Stats));
+        let stats = get!(world, (player, count, 0), (Stats));
         stats.hp.print();
 
         //get quest
-        let position_player = get!(world, (palyer, count, 0), (Position));
+        let position_player = get!(world, (player, count, 0), (Position));
         assert(position_player.x == 0, 'move error');
         assert(position_player.y == 5, 'move error');
 
-        let position_goblin = get!(world, (palyer, count, 1), (Position));
+        let position_goblin = get!(world, (player, count, 1), (Position));
         position_goblin.x.print();
         position_goblin.y.print();
 
         actions_system.move(5, 5);
 
-        let position_goblin = get!(world, (palyer, count, 1), (Position));
+        let position_goblin = get!(world, (player, count, 1), (Position));
         position_goblin.x.print();
         position_goblin.y.print();
 
         actions_system.move(5, 8);
 
-        let position_goblin = get!(world, (palyer, count, 1), (Position));
+        let position_goblin = get!(world, (player, count, 1), (Position));
         position_goblin.x.print();
         position_goblin.y.print();
 
-        let stats = get!(world, (palyer, count, 0), (Stats));
+        let stats = get!(world, (player, count, 0), (Stats));
         stats.hp.print();
     }
 
     #[test]
     #[should_panic]
     fn test_not_near() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (world, actions_system) = spawn();
 
@@ -497,7 +497,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_not_start() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let mut models = array![
             attributes::TEST_CLASS_HASH,
@@ -519,33 +519,33 @@ mod tests {
     #[test]
     #[available_gas(3000000000000000)]
     fn test_attack() {
-        let palyer = starknet::contract_address_const::<0x0>();
+        let player = starknet::contract_address_const::<0x0>();
 
         let (world, actions_system) = spawn();
 
-        let counter = get!(world, palyer, (Counter));
+        let counter = get!(world, player, (Counter));
         let count = counter.count;
 
-        let player_stats = get!(world, (palyer, count, 0), (Stats));
+        let player_stats = get!(world, (player, count, 0), (Stats));
         player_stats.hp.print();
 
-        let goblin_stats = get!(world, (palyer, count, 1), (Stats));
+        let goblin_stats = get!(world, (player, count, 1), (Stats));
         goblin_stats.hp.print();
 
         actions_system.move(0, 5);
         actions_system.move(5, 5);
         actions_system.move(5, 8);
 
-        let position_player = get!(world, (palyer, count, 0), (Position));
+        let position_player = get!(world, (player, count, 0), (Position));
 
-        let position_goblin = get!(world, (palyer, count, 1), (Position));
+        let position_goblin = get!(world, (player, count, 1), (Position));
 
         actions_system.attack();
 
-        let player_stats = get!(world, (palyer, count, 0), (Stats));
+        let player_stats = get!(world, (player, count, 0), (Stats));
         player_stats.hp.print();
 
-        let goblin_stats = get!(world, (palyer, count, 1), (Stats));
+        let goblin_stats = get!(world, (player, count, 1), (Stats));
         goblin_stats.hp.print();
     }
 }
